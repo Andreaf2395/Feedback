@@ -39,13 +39,13 @@ class FeedbackController extends Controller
             'college' => 'required',
             'no_students'=> 'required|numeric|min:0',
             'comment' => 'required',
-            'file_name'=> 'required'],
+            ],
             [ 'college.required'=> 'Please select the college name',
               'no_students.required'=>'Please mention the number of students that have been trained in the lab ',
               'no_students.numeric'=>'This field requires a number',
               'no_students.min'=> 'Number of students can not be negative',
               'comment.required'=>'Please comment on how the lab is being used ',
-              'file_name.required'=>'There is no image selected.Please select one'
+            
             ]);
 
         Log:info('In store');
@@ -56,6 +56,10 @@ class FeedbackController extends Controller
         $details->image1  =$request->input('file_name');
         $details->save();
         return view('feedback.success');
+    }
+
+    public function fetch_new_form(){
+        return view('feedback.imageupload');
     }
 
 }

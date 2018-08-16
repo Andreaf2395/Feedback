@@ -19,7 +19,7 @@ class CreateClgFeedbackTable extends Migration
             $table->string('clg_name');
             $table->integer('no_students');
             $table->text('lab_usage');
-            $table->string('image1');
+            $table->string('image1')->nullable();
             $table->string('image2')->nullable();
             $table->string('image3')->nullable();
             $table->string('image4')->nullable();

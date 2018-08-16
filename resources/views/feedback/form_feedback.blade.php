@@ -23,17 +23,6 @@
 					letter-spacing: 1px;
 
 				}
-				
-				#upload_element{
-					background:lightgrey;
-					border-radius: 5px;
-				}
-				
-				input[type="file"]
-				{
-					background:lightblue;
-				}
-
 				.divider{
 					margin: 0.5em 0 0.5em 0;
 					border :0;
@@ -83,6 +72,14 @@
 					height:30px;width:30px;cursor:pointer;
 				}	
     		
+    			div.fileinputs {
+					position: relative;
+					text-align: right;
+					-moz-opacity:0;
+					filter:alpha(opacity: 0);
+					opacity: 0;
+					z-index: -3;
+				}
 			</style>
 	</head>
 
@@ -155,16 +152,19 @@
 							<label for="upload_element">Lab Photo:</label><br>
 								<div id="upload_element" >
 									 <span class="col-md-2 ">
-										<input type="file" name="image"  id="image" multiple/><br>
-									<!--	<img class="img-rounded" width="50" height="50" id="preview_image" src="{{asset('images/no_image.png')}}"/> -->
-										@if($errors->has('file_name'))
-											<span class="text-danger">{{$errors->first('file_name')}}</span>
+									<!--	<input type="file" name="image"  id="image" multiple/><br>-->
+											<input type="button" id="add_img_btn" class="btn btn-primary" value="+ Add Images">
+											<div class="fileinputs">
+												<input type="file" class="file"  id="labimage" name="labimage"/>
+											</div>
+											
+										@if($errors->has('image'))
+											<span class="text-danger">{{$errors->first('image')}}</span>
 										@endif
-										<span class="text-danger" id="image-errors"></span>
-										<input type="hidden" id="file_name" name="file_name"/>
+										<span class="text-danger" id="image-errors"></span> 
 									</span>
 								</div>
-								<div class="col-md-8 row " id="displayboard">
+								<div class="col-md-12 row " id="displayboard">
 									<?php 
 										for($i=0; $i<5; $i++){ ?>
 											<div class="col-md-2 lab-pic " id={{$i}}>
@@ -254,8 +254,9 @@
 
 				    	for(i=0;i<data.files.length;i++)
 				    	{
-				    		$('#preview_image_'+i).attr('src', data.files[i].dirname+"/"+data.files[i].basename);
+				    		$('#preview_image_'+i).attr('src', "/"+data.files[i].dirname+"/"+data.files[i].basename);
 				    		$('#file_name_'+i).val(data.files[i].basename);
+				    		console.log(data.files[i].dirname+"/"+data.files[i].basename);
 				    	}
 			    	
 			    		for(i=data.files.length;i<5;i++){
@@ -264,60 +265,61 @@
 			    	} 
 			    }
 
+			    $('#add_img_btn').click(function () {
+			      $('#labimage').click();      
+			   
+			    });
 
-			    //image upload
-			    $('#image').change(function () {
+ 				 //image upload
+			    $('#labimage').change(function () {
 			        if ($(this).val() != '') {
 			            upload(this);
 			      	}
 			    });
+
 			    			
 			    function upload(img) {
-			        if(count>5){
-			        	$('#image-errors').append('You can upload only 5 pictures');
-			        }
-			        else{
-				        if(collegeID){
-				        	$('#image-errors').empty();
-				        	var form_data = new FormData();
-				        	form_data.append('image', img.files[0]);
-				        	form_data.append('_token', '{{csrf_token()}}');
-				        	form_data.append('college_id',collegeID);
+					if(collegeID){
+				        $('#image-errors').empty();
+				        var form_data = new FormData();
+				        form_data.append('image', img.files[0]);
+				        form_data.append('_token', '{{csrf_token()}}');
+				        form_data.append('college_id',collegeID);
 
-				        	//$('#loading').css('display', 'block');
-				       		 $.ajax({
-				            	url: "/imageupload",
-					            data: form_data,
-					            type: 'POST',
-					            contentType: false,
-					            processData: false,
-					            success: function (data) {
-					            	console.log(data);
-					            	if (data.fail)
-					                {
-					            	   $('#preview_image').attr('src', '{{asset('images/no_image.png')}}');
-					            	   $('#image-errors').append(data.errors['image']);
-					                }
-					                else {
+				        //$('#loading').css('display', 'block');
+				       	 $.ajax({
+				           	url: "/imageupload",
+					        data: form_data,
+					        type: 'POST',
+					        contentType: false,
+					        processData: false,
+					        success: function (data) {
+					            console.log(data);
+					            if (data.fail)
+					           {
+					               $('#preview_image').attr('src', '{{asset('images/no_image.png')}}');
+					               $('#image-errors').append(data.errors['image']);
+					            }
+					            else {
 					                	//$('#file_name').val(data.filename);
 					                   // $('#preview_image').attr('src', data.path);
 					                   count++;
 					                   	display(data);
-					                	}
+					            }
 					               	//$('#loading').css('display', 'none');
-					            },
-				            	error: function (xhr, status, error) {
-				                	alert(xhr.responseText);
-				                	$('#preview_image').attr('src', '{{asset('images/no_image.png')}}');
-				            	}
-				        	});
-				        }
-				        else
-				        { 
-				           $('#image-errors').append('Please select a college first');
-				        	$('#image').val('');
-				        }
-			        }
+					        },
+				            error: function (xhr, status, error) {
+				                alert(xhr.responseText);
+				                $('#preview_image').attr('src', '{{asset('images/no_image.png')}}');
+				            }
+				        });
+				    }
+				    else
+				   	{ 
+				        $('#image-errors').append('Please select a college first');
+				        $('#image').val('');
+				    }
+			        
 			    }
 
 

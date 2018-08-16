@@ -28,4 +28,9 @@ Route::get('/faculty/{clg}', 'FeedbackController@getfaculty');
 
 
 Route::post('savefeedback','FeedbackController@store');
+
+
+Route::get('trial','FeedbackController@fetch_new_form');
+
+Route::post('/newimageupload','ImageUploadController@newimageupload');
  
