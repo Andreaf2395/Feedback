@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
-class CreateClgFeedbackTable extends Migration
+class CreateImageDtlsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +13,11 @@ class CreateClgFeedbackTable extends Migration
      */
     public function up()
     {
-        Schema::create('clg_feedback', function (Blueprint $table) {
+        Schema::create('image_dtls', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('clg_id');
-            $table->integer('no_students');
-            $table->text('lab_usage');
+            $table->integer('clg_id');
+            $table->string('clg_code');
+            $table->text('filepath');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateClgFeedbackTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clg_feedback');
+        Schema::dropIfExists('image_dtls');
     }
 }

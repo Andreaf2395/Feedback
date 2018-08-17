@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Lab Ranking</title>
+		<title>ROUGH [TO BE DELETED]</title>
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>	
 			<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet"></script>
@@ -100,12 +100,10 @@
 					<div class="form-group">
 						<label for="college">College Name:</label>
 					
-						<select name="college"   class="form-control"  placeholder="select colleges">
-							<option></option>
+						<select name="college"   class="form-control" >
+							<option value="">select college</option>
 							@foreach($colleges as $c)	
-							
-									<option value="{{ $c->id }}">{{$c->college_name}},{{$c->district}}</option>
-							
+							<option value="{{ $c->id }}">{{$c->college_name}},{{$c->district}}</option>
 							@endforeach
 						</select>
 						@if($errors->has('college'))
@@ -159,8 +157,8 @@
 												<input type="file" class="file"  id="labimage" name="labimage"/>
 											</div>
 											
-										@if($errors->has('labimage'))
-											<span class="text-danger" id="image-err">{{$errors->first('labimage')}}</span>
+										@if($errors->has('image'))
+											<span class="text-danger">{{$errors->first('image')}}</span>
 										@endif
 										<span class="text-danger" id="image-errors"></span> 
 									</span>
@@ -173,7 +171,7 @@
 
 		
 					<br>
-			
+
 					<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 
@@ -185,9 +183,6 @@
 			
 			    var collegeID;
 			    var index=1;
-
-
-
 			    $('#add_faculty').click(function(e){
 			    	var html='<div>Name:<input name="faculty_name[]" type="text" id="faculty_name" />Designation:<input name="designation[]" type="text" id="designation"/>Contact no:<input name="contact_no[]" id="contact_no" type="text" />email:<input name="email[]" id="email" type="text" /><br></div>';
 
@@ -199,7 +194,7 @@
 			   
 
 			    //getting faculty of the selected college 
-			    $('select[name="college"]').on('click', function() {
+			    $('select[name="college"]').on('change', function() {
 
 			            collegeID = $(this).val();
 			            	$('#image-errors').empty();
@@ -275,10 +270,8 @@
 
 			    			
 			    function upload(img) {
-			    	 $('#image-err').empty();
 					if(collegeID){
 				        $('#image-errors').empty();
-				       
 				        var form_data = new FormData();
 				        form_data.append('image', img.files[0]);
 				        form_data.append('_token', '{{csrf_token()}}');
@@ -299,7 +292,6 @@
 					               $('#image-errors').append(data.errors['image']);
 					            }
 					            else {
-					        			
 					                   	display(data);
 					            }
 					               	//$('#loading').css('display', 'none');
@@ -339,11 +331,8 @@
 				            contentType: false,
 				            processData: false,
 				            success: function (data) {
-				            	if(data.empty)
-				            	{
-					        		$('#labimage').val('');    // this condition is for checking if there are any files uploaded
-					        		console.log('in remove image');
-				            	}
+				            	
+				            	
 				     			$('#lab-pic'+id).remove();
 				                //$('#loading').css('display', 'none');
 				            },
