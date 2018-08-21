@@ -26,11 +26,10 @@ Route::delete('/removeimage', 'ImageUploadController@deleteImage');
 
 Route::get('/faculty/{clg}', 'FeedbackController@getfaculty');
 
-
+Route::post('/faculty_save','FeedbackController@storefaculty');
 Route::post('savefeedback','FeedbackController@store');
 
 
-Route::get('trial','FeedbackController@fetch_new_form');
+//Route::get('trial','FeedbackController@fetch_new_form');
 
-Route::post('/newimageupload','ImageUploadController@newimageupload');
- 
+//Route::post('/newimageupload','ImageUploadController@newimageupload');

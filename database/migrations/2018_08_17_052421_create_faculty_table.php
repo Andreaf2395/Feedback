@@ -16,7 +16,7 @@ class CreateFacultyTable extends Migration
         Schema::create('faculty', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('clg_id');
-            $table->string('faculty_name');
+            $table->string('faculty_name')->nullable();
             $table->string('designation');
             $table->integer('mobile_no');
             $table->string('email');

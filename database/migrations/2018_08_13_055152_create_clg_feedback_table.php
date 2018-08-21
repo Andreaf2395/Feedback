@@ -18,6 +18,7 @@ class CreateClgFeedbackTable extends Migration
             $table->increments('id');
             $table->string('clg_id');
             $table->integer('no_students');
+            $table->integer('lab_incharge');
             $table->text('lab_usage');
             $table->timestamps();
         });
