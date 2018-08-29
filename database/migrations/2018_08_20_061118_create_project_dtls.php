@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImageDtlsTable extends Migration
+class CreateProjectDtls extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateImageDtlsTable extends Migration
      */
     public function up()
     {
-        Schema::create('image_dtls', function (Blueprint $table) {
+        Schema::create('project_dtls', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('clg_id');
-            $table->string('clg_code');
-            $table->text('filepath_lab')->nullable();
-            $table->text('filepath_project')->nullable();
+            $table->string('projectname');
+            $table->string('no_participants');
+            $table->string('category');
+            $table->string('image')->nullable();
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateImageDtlsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('image_dtls');
+        Schema::dropIfExists('project_dtls');
     }
 }

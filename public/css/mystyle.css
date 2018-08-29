@@ -1,0 +1,99 @@
+table {
+  					table-layout: fixed;
+  					width: 100%;
+  					border-collapse: collapse;
+  					border: 3px solid lightblue;
+  					background: linear-gradient(to top, white, #6be7e599);
+
+				}
+				th,td {
+					border:2px solid black;
+					text-align: center;
+					letter-spacing: 1px;
+					overflow:hidden;
+				}
+				.divider{
+					margin: 0.5em 0 0.5em 0;
+					border :0;
+					height:1px;
+					width:100%;
+					display:block;
+					background-color: blue;
+					background-image:linear-gradient(to right,pink,blue,pink);
+				}
+				.box{
+					background-color: rgba(255,255,255,0.7);
+					box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.30), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+					padding:10px;
+    			
+				}
+				body{
+					margin-top: 50px;
+					  background-color: #cce6ff;
+  					  height:100%;
+  					  background-repeat: no-repeat;
+    				  background-size: cover;
+    				  background-attachment: fixed;
+    				 }
+				html{
+					 height:100% ; 
+  					 }
+				.img-thumbnail{
+					height:80px;
+					width:80px;
+					box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.30), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+					margin-bottom: 10px;
+				}
+
+				.row
+				{
+					background:white;
+					border-radius: 5px;
+					margin:auto;
+					padding: 10px;
+				}
+				.delete_btn{
+					height:30px;
+					width:30px;
+				}
+				
+				.delete_btn:hover { 
+
+					-moz-box-shadow: 0 1px 10px rgba(255,0,0,0.8); 
+					-webkit-box-shadow: 0 1px 10px rgba(255,0,0,0.19);     
+					box-shadow: 0 1px 10px rgba(255,0,0,0.8)
+					}
+
+				.delete_btn img {
+					height:30px;width:30px;cursor:pointer;
+				}
+				.close_btn img{
+					height:30px;width:30px;cursor:pointer;
+					float:right;
+				}	
+				
+    		
+    			div.fileinputs {
+					position: relative;
+					text-align: right;
+					-moz-opacity:0;
+					filter:alpha(opacity: 0);
+					opacity: 0;
+					z-index: -3;
+				}
+				.info {
+				    background-color: #6be7e599;
+					border-left: 6px solid #60228d;
+					border-radius: 5px
+				}
+				label::after{
+						content:"*";
+						color:red;
+				}
+				.project_dtls{
+					background-color: rgba(255,255,255,0.7);
+					box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.30), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+					padding:10px;
+					border-radius:5px;
+					margin-bottom: 10px;
+				}
